@@ -41,7 +41,47 @@ jobs:
       - name: Setting azure subscription
         run: az account set --subscription 14168ade-3357-4b6b-8e3a-b97bde79c54f
 
+#       - name: Deploy to Kubernetes cluster
+#         run: kubectl apply -f services/Items/deployment.yaml
+
+      - name: Azure Kubernetes set context
+        uses: Azure/aks-set-context@v2.1
+        with:
+          # Resource Group Name
+          resource-group: ctse_assignment03 
+          # AKS Cluster Name
+          cluster-name: kube_ctse_ass3
+          
+          
+      - name: Create secret in Kubernetes cluster
+        uses: Azure/k8s-create-secret@v2.1
+        with:
+          # Choose the target Kubernetes namespace. If the namespace is not provided, the commands will run in the default namespace.
+          namespace: default
+          # Type of Kubernetes secret. For example, docker-registry or generic
+          secret-type: docker-registry
+          # Name of the secret. You can use this secret name in the Kubernetes YAML configuration file.
+          secret-name: docker-image-pull-secret
+
+      
       - name: Deploy to Kubernetes cluster
-        run: kubectl apply -f services/Items/deployment.yaml
+        uses: Azure/k8s-deploy@v3.1
+        with:
+          # Choose the target Kubernetes namespace. If the namespace is not provided, the commands will run in the default namespace.
+          namespace:  default
+          # Path to the manifest files which will be used for deployment.
+          manifests: services/Items/deployment.yaml
+          # Fully qualified resource URL of the image(s) to be used for substitutions on the manifest files Example: contosodemo.azurecr.io/helloworld:test
+          images: thushaltk/ctse_items:'${{github.sha}}'
+          # Name of a docker-registry secret that has already been set up within the cluster. Each of these secret names are added under imagePullSecrets field for the workloads found in the input manifest files
+          imagepullsecrets: docker-image-pull-secret
+          # Switch whether to pull the images from the registry before deployment to find out Dockerfile's path in order to add it to the annotations
+          pull-images: true
+          # deploy, promote, or reject
+          action: deploy
+          # Deploy when a previous deployment already exists. If true then --force argument is added to the apply command
+          force: true
+          # Github token
+          token: '${{ github.token }}'
 
 

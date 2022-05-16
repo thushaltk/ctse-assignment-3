@@ -38,3 +38,9 @@ jobs:
       - name: Azure login
         run: az login -u '${{secrets.AZURE_USERNAME}}' -p '${{secrets.AZURE_PASSWORD}}'
         
+      - name: Setting azure subscription
+        run: az account set --subscription 14168ade-3357-4b6b-8e3a-b97bde79c54f
+        
+      - name: Adding container to kubernetes cluster
+        run: cd services/Items; kubectl apply -f deployment.yaml
+        

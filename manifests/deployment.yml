@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: "kubectseass3-baa9"
-          image: "ctsecontainer.azurecr.io/kubectseass3"
+          image: thushaltk/ctse_items:1.0.4
           ports:
           - containerPort: 3003

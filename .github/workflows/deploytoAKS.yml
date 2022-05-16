@@ -35,3 +35,6 @@ jobs:
       - name: Pushing docker image to dockerhub
         run: docker push thushaltk/ctse_items:'${{github.sha}}' 
         
+      - name: Azure login
+        run: az login -u '${{secrets.AZURE_USERNAME}}' -p '${{secrets.AZURE_PASSWORD}}'
+        

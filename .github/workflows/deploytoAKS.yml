@@ -32,8 +32,11 @@ jobs:
       - name: Dockerhub authentication
         run: docker login --username '${{secrets.DOCKER_USERNAME}}' --password '${{secrets.DOCKER_PASSWORD}}'
         
+      - name: Docker tag
+        run: docker tag thushaltk/ctse_items:'${{github.sha}}' '${{secrets.DOCKER_USERNAME}}'/thushaltk/ctse_items:'${{github.sha}}'
+        
       - name: Pushing docker image to dockerhub
-        run: docker push thushaltk/ctse_items:'${{github.sha}}' 
+        run: docker push '${{secrets.DOCKER_USERNAME}}'/thushaltk/ctse_items:'${{github.sha}}' 
         
       - name: Azure login
         run: az login -u '${{secrets.AZURE_USERNAME}}' -p '${{secrets.AZURE_PASSWORD}}'
@@ -63,7 +66,7 @@ jobs:
         uses: Azure/k8s-deploy@v3.1
         with:
           manifests: services/Items/deployment.yaml
-          images: thushaltk/ctse_items:'${{github.sha}}'
+          images: '${{secrets.DOCKER_USERNAME}}/thushaltk/ctse_items:${{github.sha}}'
           imagepullsecrets: docker-image-pull-secret
           action: deploy
 

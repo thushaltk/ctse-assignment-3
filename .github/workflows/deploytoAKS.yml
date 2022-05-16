@@ -27,3 +27,6 @@ jobs:
 
       - name: cd services/Items
         run: cd services/Items 
+        
+      - name: docker build --platform amd64 -t thushaltk/ctse_items:'${{github.sha}}' .
+        run: docker build --platform amd64 -t thushaltk/ctse_items:'${{github.sha}}' .

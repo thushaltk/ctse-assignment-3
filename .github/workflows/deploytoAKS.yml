@@ -26,5 +26,6 @@ jobs:
       - uses: actions/checkout@v3
     
         
-      - name: Building docker image for "ItemsService"
-        run: cd services/Items; docker build --platform amd64 -t thushaltk/ctse_items:'${{github.sha}}' .
+      - name: Building docker image for "ItemsService" and pushing to Docker hub
+        run: cd services/Items; docker build --platform amd64 -t thushaltk/ctse_items:'${{github.sha}}' .; docker push thushaltk/ctse_items:'${{github.sha}}' 
+        

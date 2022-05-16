@@ -41,7 +41,7 @@ jobs:
       - name: Setting azure subscription
         run: az account set --subscription 14168ade-3357-4b6b-8e3a-b97bde79c54f
 
-      - name: Deploy to Kubernetes cluster
+      - name: Deploy to Kubernetes cluster in Azure
         uses: Azure/k8s-deploy@v3.1
         with:
           manifests: services/Items/deployment.yaml

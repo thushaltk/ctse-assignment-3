@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "kubectseass3-baa9"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "kubectseass3-baa9"
+  template:
+    metadata:
+      labels:
+        app: "kubectseass3-baa9"
+    spec:
+      containers:
+        - name: "kubectseass3-baa9"
+          image: "ctsecontainer.azurecr.io/kubectseass3"
+          ports:
+          - containerPort: 3003

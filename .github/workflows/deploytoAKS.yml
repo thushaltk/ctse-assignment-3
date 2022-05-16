@@ -25,11 +25,8 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: navigate to items
-        run: cd services/Items
+      - name: navigate to items and list files
+        run: cd services/Items; ls -a
         
-      - name: list files
-        run: ls -a
-        
-      - name: docker build --platform amd64 -t thushaltk/ctse_items:'${{github.sha}}' .
-        run: docker build --platform amd64 -t thushaltk/ctse_items:'${{github.sha}}' .
+#       - name: docker build --platform amd64 -t thushaltk/ctse_items:'${{github.sha}}' .
+#         run: docker build --platform amd64 -t thushaltk/ctse_items:'${{github.sha}}' .

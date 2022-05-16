@@ -41,30 +41,13 @@ jobs:
       - name: Setting azure subscription
         run: az account set --subscription 14168ade-3357-4b6b-8e3a-b97bde79c54f
 
-      - name: Azure Kubernetes set context
-        uses: Azure/aks-set-context@v2.1
-        with:
-          # Resource Group Name
-          resource-group: ctse_assignment03
-          # AKS Cluster Name
-          cluster-name: kube_ctse_ass3
-          
-          
-      - name: Create secret in Kubernetes cluster
-        uses: Azure/k8s-create-secret@v2.1
-        with:
-          container-registry-url: https://index.docker.io/v1/
-          container-registry-username: '${{secrets.DOCKER_USERNAME}}'
-          container-registry-password: '${{secrets.DOCKER_PASSWORD}}'
-          secret-type: docker-registry
-          secret-name:  docker-image-pull-secret
-          
       - name: Deploy to Kubernetes cluster
         uses: Azure/k8s-deploy@v3.1
         with:
           manifests: services/Items/deployment.yaml
+          # Fully qualified resource URL of the image(s) to be used for substitutions on the manifest files Example: contosodemo.azurecr.io/helloworld:test
           images: thushaltk/ctse_items:'${{github.sha}}'
-          imagepullsecrets: docker-image-pull-secret
+          # Name of a docker-registry secret that has already been set up within the cluster. Each of these secret names are added under imagePullSecrets field for the workloads found in the input manifest files
           action: deploy
 
 

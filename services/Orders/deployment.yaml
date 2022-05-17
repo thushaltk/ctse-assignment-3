@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ctse-orders-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ctse-orders
+  template:
+    metadata:
+      labels:
+        app: ctse-orders
+    spec:
+      containers:
+      - name: ctse-orders
+        image: 0712741286/ctse_orders:1.0.1
+        ports:
+        - containerPort: 3004
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ctse-orders-service
+spec:
+  selector:
+      app: ctseOrdersService
+  ports:
+  - protocol: TCP
+    port: 3004
+    targetPort: 3004
+  type: LoadBalancer

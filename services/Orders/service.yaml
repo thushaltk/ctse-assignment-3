@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: apps/v1
+metadata:
+  name: ctse-orders-service
+spec:
+  selector:
+    matchLabels:
+      app: ctse-orders
+  ports:
+  - protocol: TCP
+    port: 3004
+    targetPort: 3004
+  type: LoadBalancer

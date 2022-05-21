@@ -10,7 +10,7 @@ addNewUsers = async(req, res) => {
             errorMsg: "No data provided"
         })
     }else{
-        await new ItemModel(userData).save().then(() => {
+        await new UsersModel(userData).save().then(() => {
             return res.status(200).json({
                 success: true,
                 message: 'Added New Users'

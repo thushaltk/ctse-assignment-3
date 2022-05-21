@@ -41,9 +41,6 @@ jobs:
       - name: Setting azure subscription
         run: az account set --subscription 14168ade-3357-4b6b-8e3a-b97bde79c54f
 
-#       - name: Deploy to Kubernetes cluster
-#         run: kubectl apply -f services/Orders/deployment.yaml
-
       - name: Azure Kubernetes set context
         uses: Azure/aks-set-context@v2.1
         with:

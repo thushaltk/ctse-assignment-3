@@ -13,6 +13,6 @@ spec:
     spec:
       containers:
       - name: ctse-users
-        image: kishdeemu/ctse_users:1.0.3
+        image: kishdeemu/ctse_users:1.0.4
         ports:
         - containerPort: 3005

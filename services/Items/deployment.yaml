@@ -23,7 +23,7 @@ metadata:
   name: ctse-items-service
 spec:
   selector:
-      app: ctseItemsService
+      app: ctse-items
   ports:
   - protocol: TCP
     port: 3003

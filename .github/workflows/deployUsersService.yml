@@ -27,7 +27,7 @@ jobs:
     
         
       - name: Building docker image for "UsersService"
-        run: cd services/Cart; docker build --platform amd64 -t kishdeemu/ctse_users:${{github.sha}} .
+        run: cd services/Users; docker build --platform amd64 -t kishdeemu/ctse_users:${{github.sha}} .
         
       - name: Dockerhub authentication
         run: docker login --username '${{secrets.DOCKER_USERNAME_KISHEN}}' --password '${{secrets.DOCKER_PASSWORD_KISHEN}}'

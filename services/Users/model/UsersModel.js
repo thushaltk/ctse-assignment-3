@@ -16,7 +16,7 @@ const UsersModel = new Schema(
             required: true
         },
         dateOfBirth: {
-            type: Number,
+            type: String,
             required: true
         },
         gender: {
@@ -27,7 +27,7 @@ const UsersModel = new Schema(
             type: String,
             required: true
         },
-        pasword: {
+        password: {
             type: String,
             required: true
         }

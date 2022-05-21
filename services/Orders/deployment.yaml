@@ -23,7 +23,7 @@ metadata:
   name: ctse-orders-service
 spec:
   selector:
-      app: ctseOrdersService
+      app: ctse-orders
   ports:
   - protocol: TCP
     port: 3004
